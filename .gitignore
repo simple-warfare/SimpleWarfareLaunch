@@ -12,6 +12,7 @@
 /dataSources/
 /dataSources.local.xml
 /.idea
+/.idea/*
 bin/
 obj/
 /packages/
