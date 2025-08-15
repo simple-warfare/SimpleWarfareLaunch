@@ -1,2 +1,2 @@
-﻿using var game = new SimpleWarfareLaunch.Game1();
-game.Run();
+﻿using var launch = new SimpleWarfareLaunch.Launch();
+launch.Run();
