@@ -19,9 +19,6 @@
 /processorParam:Quality=Best
 /build:assets/musics/background.mp3
 
-#begin assets/textures/interfaces/dialog-atlas-definition.xml
-/copy:assets/textures/interfaces/dialog-atlas-definition.xml
-
 #begin assets/textures/interfaces/dialog.png
 /importer:TextureImporter
 /processor:TextureProcessor

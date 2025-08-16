@@ -4,7 +4,8 @@ namespace SimpleWarfareLauncher.Screen;
 
 public class MainScreen
 {
-    private AssetsManager _assetsManager;
+    private Launcher _launcher = Launcher.Instance;
+    internal static MainScreen Instance { get; } = new();
 
     public void Draw()
     {

@@ -6,22 +6,27 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGameGum;
+using SimpleWarfareLauncher.Assets.Songs;
+using SimpleWarfareLauncher.Screen;
 
 namespace SimpleWarfareLauncher;
 
 public class Launcher : Game
 {
-    private AssetsManager _assetsManager;
     private GraphicsDeviceManager _graphics;
-    private SpriteBatch _spriteBatch;
 
     public Launcher()
     {
+        Instance = this;
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content/assets";
         IsMouseVisible = true;
         AppState = AppState.Loading;
     }
+
+    internal SpriteBatch SpriteBatch { get; private set; }
+
+    internal static Launcher Instance { get; private set; }
 
     private AppState AppState { get; set; }
 
@@ -67,11 +72,9 @@ public class Launcher : Game
 
     protected override void LoadContent()
     {
-        _spriteBatch = new SpriteBatch(GraphicsDevice);
-        _assetsManager = new AssetsManager(Content);
+        SpriteBatch = new SpriteBatch(GraphicsDevice);
         MediaPlayer.IsRepeating = true;
-        MediaPlayer.Play(_assetsManager.BackgroundMusic);
-        AppState = AppState.Main;
+        MediaPlayer.Play(Songs.Background);
     }
 
     protected override void Update(GameTime gameTime)
@@ -79,6 +82,8 @@ public class Launcher : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
+
+        if (gameTime.TotalGameTime.Seconds >= 1) AppState = AppState.Main;
 
 
         base.Update(gameTime);
@@ -92,12 +97,7 @@ public class Launcher : Game
         {
             case AppState.Loading:
             {
-                var loadingScreen = _assetsManager.LoadingScreen;
-                _spriteBatch.Begin();
-                _spriteBatch.Draw(loadingScreen,
-                    new Vector2(Window.ClientBounds.Width, Window.ClientBounds.Height) * 0.5f, null, Color.White, 0.0f,
-                    new Vector2(loadingScreen.Width, loadingScreen.Height) * 0.5f, 1.0f, SpriteEffects.None, 0.0f);
-                _spriteBatch.End();
+                LoadingScreen.Instance.Draw();
                 break;
             }
             case AppState.Main:
