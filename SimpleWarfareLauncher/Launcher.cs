@@ -18,7 +18,7 @@ public class Launcher : Game
     public Launcher()
     {
         _graphics = new GraphicsDeviceManager(this);
-        Content.RootDirectory = "Content";
+        Content.RootDirectory = "Content/assets";
         IsMouseVisible = true;
         AppState = AppState.Loading;
     }
@@ -68,7 +68,6 @@ public class Launcher : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        Content.RootDirectory = "Content/assets";
         _assetsManager = new AssetsManager(Content);
         MediaPlayer.IsRepeating = true;
         MediaPlayer.Play(_assetsManager.BackgroundMusic);
