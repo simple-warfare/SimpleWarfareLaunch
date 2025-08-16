@@ -7,20 +7,20 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGameGum;
 
-namespace SimpleWarfareLaunch;
+namespace SimpleWarfareLauncher;
 
-public class Launch : Game
+public class Launcher : Game
 {
+    private AssetsManager _assetsManager;
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private AssetsManager AssetsManager;
 
-    public Launch()
+    public Launcher()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-        AppState = AppState.LoadingAssets;
+        AppState = AppState.Loading;
     }
 
     private AppState AppState { get; set; }
@@ -50,13 +50,11 @@ public class Launch : Game
 
         // Customize the tab reverse UI navigation to also trigger when the keyboard
         // Up arrow key is pushed.
-        FrameworkElement.TabReverseKeyCombos.Add(
-            new KeyCombo { PushedKey = Keys.Up });
+        FrameworkElement.TabReverseKeyCombos.Add(new KeyCombo { PushedKey = Keys.Up });
 
         // Customize the tab UI navigation to also trigger when the keyboard
         // Down arrow key is pushed.
-        FrameworkElement.TabKeyCombos.Add(
-            new KeyCombo { PushedKey = Keys.Down });
+        FrameworkElement.TabKeyCombos.Add(new KeyCombo { PushedKey = Keys.Down });
 
         // The assets created for the UI were done so at 1/4th the size to keep the size of the
         // texture atlas small.  So we will set the default canvas size to be 1/4th the size of
@@ -71,9 +69,9 @@ public class Launch : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         Content.RootDirectory = "Content/assets";
-        AssetsManager = new AssetsManager(Content);
+        _assetsManager = new AssetsManager(Content);
         MediaPlayer.IsRepeating = true;
-        MediaPlayer.Play(AssetsManager.BackgroundMusic);
+        MediaPlayer.Play(_assetsManager.BackgroundMusic);
         AppState = AppState.Main;
     }
 
@@ -93,23 +91,13 @@ public class Launch : Game
 
         switch (AppState)
         {
-            case AppState.LoadingAssets:
+            case AppState.Loading:
             {
-                var loadingScreen = AssetsManager.LoadingScreen;
+                var loadingScreen = _assetsManager.LoadingScreen;
                 _spriteBatch.Begin();
-                _spriteBatch.Draw(loadingScreen, new Vector2(
-                        Window.ClientBounds.Width,
-                        Window.ClientBounds.Height) * 0.5f,
-                    null,
-                    Color.White,
-                    0.0f,
-                    new Vector2(
-                        loadingScreen.Width,
-                        loadingScreen.Height) * 0.5f,
-                    1.0f,
-                    SpriteEffects.None,
-                    0.0f
-                );
+                _spriteBatch.Draw(loadingScreen,
+                    new Vector2(Window.ClientBounds.Width, Window.ClientBounds.Height) * 0.5f, null, Color.White, 0.0f,
+                    new Vector2(loadingScreen.Width, loadingScreen.Height) * 0.5f, 1.0f, SpriteEffects.None, 0.0f);
                 _spriteBatch.End();
                 break;
             }
@@ -123,5 +111,6 @@ public class Launch : Game
 
 
         base.Draw(gameTime);
+        GumService.Default.Draw();
     }
 }

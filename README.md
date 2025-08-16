@@ -1,2 +1,2 @@
-# SimpleWarfareLaunch
-A Launch for SimpleWarfare using monogame engine
+# SimpleWarfareLauncher
+A Launcher for SimpleWarfare using monogame engine

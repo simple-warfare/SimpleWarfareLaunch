@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Graphics;
 
-namespace SimpleWarfareLaunch;
+namespace SimpleWarfareLauncher;
 
 public class AssetsManager
 {
@@ -14,6 +14,7 @@ public class AssetsManager
     public AssetsManager(ContentManager content)
     {
         Instance = this;
+
         LoadingScreen = content.Load<Texture2D>("textures/interfaces/loading_screen");
         Dialog = content.Load<Texture2D>("textures/interfaces/dialog");
         BackgroundMusic = content.Load<Song>("musics/background");

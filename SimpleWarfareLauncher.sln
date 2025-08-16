@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWarfareLaunch", "SimpleWarfareLaunch\SimpleWarfareLaunch.csproj", "{8DEC6042-A42C-49FB-884D-7524F0DC5BDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWarfareLauncher", "SimpleWarfareLauncher\SimpleWarfareLauncher.csproj", "{8DEC6042-A42C-49FB-884D-7524F0DC5BDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
